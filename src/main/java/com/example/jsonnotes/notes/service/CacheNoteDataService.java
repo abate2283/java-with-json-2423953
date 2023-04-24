@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 /**
  * A data service for {@link Note Notes} that stores all data in a collection in memory.
@@ -73,7 +74,7 @@ public class CacheNoteDataService implements INoteDataService {
 
     @Override
     public List<Note> getAllNotes() {
-        return _cache.values().stream().toList();
+        return _cache.values().stream().collect(Collectors.toList());
     }
 
     @Override

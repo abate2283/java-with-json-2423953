@@ -6,6 +6,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class JsonNotesFile {
 
@@ -33,7 +34,7 @@ public class JsonNotesFile {
             }
         });
         this.notes = noteMap;
-        return notes.values().stream().toList();
+        return notes.values().stream().collect(Collectors.toList());
     }
 
     public void setNotes(List<Note> notes) {

@@ -6,6 +6,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Utility class used to make interacting with {@link Note Notes} easier.
@@ -121,7 +122,7 @@ public class NoteHelper {
      */
     public static String getNotesDataStringFromList(List<Note> notes) {
         //Run getNoteIdContentPair on each Note in the list and store the results in a new list
-        List<String> noteStrings = notes.stream().map(NoteHelper::getNoteIdContentPair).toList();
+        List<String> noteStrings = notes.stream().map(NoteHelper::getNoteIdContentPair).collect(Collectors.toList());
         //Join the items in the list with the \\u221E character
         return String.join("\\u221E", noteStrings);
     }

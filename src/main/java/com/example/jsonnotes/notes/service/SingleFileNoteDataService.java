@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * A data service for {@link Note Notes} that stores all data in a single {@link File}
@@ -81,7 +82,7 @@ public abstract class SingleFileNoteDataService implements INoteDataService {
     @Override
     public List<Note> getAllNotes() {
         //There is no need to check the file. The cache SHOULD be accurate for reads
-        return _notes.values().stream().toList();
+        return _notes.values().stream().collect(Collectors.toList());
     }
 
     @Override
@@ -173,7 +174,7 @@ public abstract class SingleFileNoteDataService implements INoteDataService {
      * @return TRUE if the file was written successfully. FALSE if it was not
      */
     private boolean _writeNotesToFile() {
-        var fileData = getFileDataFromNotes(_notes.values().stream().toList());
+        var fileData = getFileDataFromNotes(_notes.values().stream().collect(Collectors.toList()));
         if (!FileHelper.replaceFileData(_notesFile, fileData)) {
             System.out.println("Error while rewriting notes file. WARNING - The file may no longer match the cache.");
             return false;
